@@ -1,11 +1,13 @@
 import 'chai/register-should';
 import Pawn from '../../../src/engine/pieces/pawn';
+import Rook from '../../../src/engine/pieces/rook';
 import Board from '../../../src/engine/board';
 import Player from '../../../src/engine/player';
 import Square from '../../../src/engine/square';
 import Rook from "../../../src/engine/pieces/rook";
 
 describe('Pawn', () => {
+
 
     describe('white pawns', () => {
 
@@ -31,6 +33,15 @@ describe('Pawn', () => {
 
             moves.should.have.length(2);
             moves.should.deep.include.members([Square.at(2, 7), Square.at(3, 7)]);
+        });
+
+        it('cannot move at the top of the board', () => {
+            const pawn = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(7, 3), pawn);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.be.empty;
         });
 
     });
@@ -66,6 +77,21 @@ describe('Pawn', () => {
             const blockingPiece = new Rook(Player.WHITE);
             board.setPiece(Square.at(6, 3), pawn);
             board.setPiece(Square.at(5, 3), blockingPiece);
+        it('cannot move at the bottom of the board', () => {
+            const pawn = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(0, 3), pawn);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.be.empty;
+        });
+    });
+
+    it('cannot move if there is a piece in front', () => {
+        const pawn = new Pawn(Player.BLACK);
+        const blockingPiece = new Rook(Player.WHITE);
+        board.setPiece(Square.at(6, 3), pawn);
+        board.setPiece(Square.at(5, 3), blockingPiece);
 
             const moves = pawn.getAvailableMoves(board);
 
@@ -83,4 +109,5 @@ describe('Pawn', () => {
             moves.should.not.deep.include(Square.at(4, 3));
         });
     });
+
 });
