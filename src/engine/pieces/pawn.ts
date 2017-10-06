@@ -2,6 +2,9 @@ import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
 import Square from "../square";
+import commonMoves from "../commonMoves";
+import King from "./king";
+import player from "../player";
 
 export default class Pawn extends Piece {
     public constructor(player: Player) {
@@ -23,6 +26,19 @@ export default class Pawn extends Piece {
                         availableMoves.push(newSquare);
                     }
                 }
+            }
+
+            let newRow = currentPos.row + 1;
+            let newCol = currentPos.col + 1;
+            newSquare = Square.at(newRow, newCol);
+            if(board.getPiece(newSquare) !== undefined &&  board.getPiece(Square.at(newRow, newCol))?.player !== this.player && !(board.getPiece(Square.at(newRow,newCol)) instanceof King)) {
+                availableMoves.push(Square.at(newRow, newCol));
+            }
+
+            newCol = currentPos.col - 1;
+            newSquare = Square.at(newRow, newCol);
+            if(board.getPiece(newSquare) !== undefined &&  board.getPiece(Square.at(newRow, newCol))?.player !== this.player && !(board.getPiece(Square.at(newRow,newCol)) instanceof King)) {
+                availableMoves.push(Square.at(newRow, newCol));
             }
         }
 
