@@ -7,17 +7,19 @@ import Bishop from "./pieces/bishop";
 import player from "./player";
 import King from "./pieces/king";
 
-
-
 export default class commonMoves {
 
-    private static goodSquare(board: Board, player: Player, availableMoves : Square[] , newRow : number, newCol: number) : boolean {
+    // it adds the move to the available moves
+    // side effect introduced to the rock and bishop, it return true if it need to stop the flow in the for loop if
+    // it captures another piece
+    public static goodSquare(board: Board, player: Player, availableMoves : Square[] , newRow : number, newCol: number) : boolean {
         if (board.getPiece(Square.at(newRow, newCol)) !== undefined) {
             if (board.getPiece(Square.at(newRow, newCol))?.player !== player && !(board.getPiece(Square.at(newRow,newCol)) instanceof King)) {
                 availableMoves.push(Square.at(newRow, newCol));
             }
             return true;
         }
+        availableMoves.push(Square.at(newRow, newCol));
         return false;
     }
 
@@ -29,13 +31,11 @@ export default class commonMoves {
                 if (this.goodSquare(board, player, availableMoves, i, currentPos.col)) {
                     break;
                 }
-                availableMoves.push(Square.at(i, currentPos.col));
             }
             if (i != currentPos.col) {
                 if (this.goodSquare(board, player, availableMoves, currentPos.row, i)) {
                     break;
                 }
-                availableMoves.push(Square.at(currentPos.row, i));
             }
         }
         return availableMoves;
@@ -49,7 +49,6 @@ export default class commonMoves {
                 if (this.goodSquare(board, player, availableMoves, newRow, newCol)) {
                     break;
                 }
-                availableMoves.push(Square.at(newRow, newCol));
             }
         }
     }

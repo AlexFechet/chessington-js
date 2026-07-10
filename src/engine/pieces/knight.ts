@@ -2,6 +2,7 @@ import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
 import Square from "../square";
+import commonMoves from "../commonMoves";
 
 export default class Knight extends Piece {
     public constructor(player: Player) {
@@ -20,7 +21,7 @@ export default class Knight extends Piece {
             let newCol = currentPos.col + dj[k];
 
             if(Square.checkDimensions(newRow, newCol)) {
-                availableMoves.push(Square.at(newRow, newCol));
+                commonMoves.goodSquare(board, this.player, availableMoves, newRow, newCol);
             }
         }
 
