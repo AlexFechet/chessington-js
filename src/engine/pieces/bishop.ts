@@ -4,6 +4,7 @@ import Board from '../board';
 import Square from "../square";
 import GameSettings from "../gameSettings";
 import commonMoves from "../commonMoves";
+import player from "../player";
 
 export default class Bishop extends Piece {
     public constructor(player: Player) {
@@ -12,7 +13,7 @@ export default class Bishop extends Piece {
 
     public getAvailableMoves(board: Board) {
         let currentPos = board.findPiece(this);
-        return commonMoves.getDiagonalMoves(board.findPiece(this), board);
+        return commonMoves.getDiagonalMoves(board.findPiece(this), board, this.player);
     }
 
 
