@@ -11,34 +11,52 @@ export default class Bishop extends Piece {
 
     public getAvailableMoves(board: Board) {
         let currentPos = board.findPiece(this);
-        return Bishop.getDiagonalMoves(board.findPiece(this));
+        return Bishop.getDiagonalMoves(board.findPiece(this), board);
     }
 
-    public static getDiagonalMoves(currentPos: Square) {
+    public static getDiagonalMoves(currentPos: Square, board: Board) {
         let availableMoves : Square[] = [];
 
         for(let i = 1; i < GameSettings.BOARD_SIZE; i++) {
             let newRow = currentPos.row + i;
             let newCol = currentPos.col + i;
-            if(Square.checkDimensions(newRow, newCol)) {
+            if (Square.checkDimensions(newRow, newCol)) {
+                if (board.getPiece(Square.at(newRow, newCol)) !== undefined) {
+                    break;
+                }
                 availableMoves.push(Square.at(newRow, newCol));
             }
+        }
 
-            newRow = currentPos.row - i;
-            newCol = currentPos.col - i;
-            if(Square.checkDimensions(newRow, newCol)) {
+        for(let i = 1; i < GameSettings.BOARD_SIZE; i++) {
+            let newRow = currentPos.row - i;
+            let newCol = currentPos.col - i;
+            if (Square.checkDimensions(newRow, newCol)) {
+                if (board.getPiece(Square.at(newRow, newCol)) !== undefined) {
+                    break;
+                }
                 availableMoves.push(Square.at(newRow, newCol));
             }
+        }
 
-            newRow = currentPos.row + i;
-            newCol = currentPos.row + currentPos.col - newRow;
-            if(Square.checkDimensions(newRow, newCol)) {
+        for(let i = 1; i < GameSettings.BOARD_SIZE; i++) {
+            let newRow = currentPos.row + i;
+            let newCol = currentPos.row + currentPos.col - newRow;
+            if (Square.checkDimensions(newRow, newCol)) {
+                if (board.getPiece(Square.at(newRow, newCol)) !== undefined) {
+                    break;
+                }
                 availableMoves.push(Square.at(newRow, newCol));
             }
+        }
 
-            newRow = currentPos.row - i;
-            newCol = currentPos.row + currentPos.col - newRow;
+        for(let i = 1; i < GameSettings.BOARD_SIZE; i++) {
+            let newRow = currentPos.row - i;
+            let newCol = currentPos.row + currentPos.col - newRow;
             if(Square.checkDimensions(newRow, newCol)) {
+                if(board.getPiece(Square.at(newRow, newCol)) !== undefined) {
+                    break;
+                }
                 availableMoves.push(Square.at(newRow, newCol));
             }
         }
