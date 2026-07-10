@@ -15,7 +15,7 @@ export default class Queen extends Piece {
         let availableMoves : Square[] = [];
         let currentPos = board.findPiece(this);
 
-        availableMoves = [...Rook.getLateralMoves(currentPos, board), ...Bishop.getDiagonalMoves(currentPos, board)];
+        availableMoves = [...Rook.getLateralMoves(currentPos, board, this.player), ...Bishop.getDiagonalMoves(currentPos, board)];
         return availableMoves;
     }
 }
