@@ -13,17 +13,32 @@ export default class Pawn extends Piece {
         let currentPos = board.findPiece(this);
 
         if(this.player == Player.WHITE) {
-            availableMoves.push(Square.at(currentPos.row + 1, currentPos.col));
-            if(currentPos.row == 1) {
-                availableMoves.push(Square.at(currentPos.row + 2, currentPos.col));
+            let newSquare = Square.at(currentPos.row + 1, currentPos.col);
+
+            if(board.getPiece(newSquare) == undefined) {
+                availableMoves.push(newSquare);
+                if(currentPos.row == 1) {
+                    newSquare = Square.at(currentPos.row + 2, currentPos.col);
+                    if(board.getPiece(newSquare) == undefined) {
+                        availableMoves.push(newSquare);
+                    }
+                }
             }
         } else {
-            availableMoves.push(Square.at(currentPos.row - 1, currentPos.col));
-            if(currentPos.row == 6) {
-                availableMoves.push(Square.at(currentPos.row - 2, currentPos.col));
+            let newSquare = Square.at(currentPos.row - 1, currentPos.col);
+
+            if(board.getPiece(newSquare) == undefined) {
+                availableMoves.push(newSquare);
+                if (currentPos.row == 6) {
+                    newSquare = Square.at(currentPos.row - 2, currentPos.col);
+                    if (board.getPiece(newSquare) == undefined) {
+                        availableMoves.push(newSquare);
+                    }
+                }
             }
         }
 
         return availableMoves;
     }
+
 }
