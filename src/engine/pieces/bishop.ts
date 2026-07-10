@@ -10,8 +10,12 @@ export default class Bishop extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        let availableMoves : Square[] = [];
         let currentPos = board.findPiece(this);
+        return Bishop.getDiagonalMoves(board.findPiece(this));
+    }
+
+    public static getDiagonalMoves(currentPos: Square) {
+        let availableMoves : Square[] = [];
 
         for(let i = 1; i < GameSettings.BOARD_SIZE; i++) {
             let newRow = currentPos.row + i;

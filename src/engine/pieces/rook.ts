@@ -3,6 +3,7 @@ import Player from '../player';
 import Board from '../board';
 import Square from "../square";
 import GameSettings from "../gameSettings";
+import Bishop from "./bishop";
 
 export default class Rook extends Piece {
     public constructor(player: Player) {
@@ -10,8 +11,12 @@ export default class Rook extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        let availableMoves : Square[] = [];
         let currentPos = board.findPiece(this);
+        return Rook.getLateralMoves(currentPos);
+    }
+
+    public static getLateralMoves(currentPos: Square) {
+        let availableMoves : Square[] = [];
 
         for(let i = 0; i < GameSettings.BOARD_SIZE; i++) {
             if(i != currentPos.row) {
@@ -23,4 +28,5 @@ export default class Rook extends Piece {
         }
         return availableMoves;
     }
+
 }
