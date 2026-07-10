@@ -10,7 +10,6 @@ export default class Rook extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-
         let availableMoves : Square[] = [];
         let currentPos = board.findPiece(this);
 
@@ -22,7 +21,6 @@ export default class Rook extends Piece {
                 availableMoves.push(Square.at(currentPos.row, i));
             }
         }
-
         return availableMoves;
     }
 }

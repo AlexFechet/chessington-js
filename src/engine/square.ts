@@ -1,3 +1,5 @@
+import GameSettings from "./gameSettings";
+
 export default class Square {
     public row: number;
     public col: number;
@@ -5,6 +7,10 @@ export default class Square {
     public constructor(row: number, col: number) {
         this.row = row;
         this.col = col;
+    }
+
+    public static checkDimensions(row: number, col: number) {
+        return row >= 0 && row < GameSettings.BOARD_SIZE && col >= 0 && col < GameSettings.BOARD_SIZE;
     }
 
     public static at(row: number, col: number) {
