@@ -12,7 +12,7 @@ export default class Pawn extends Piece {
         let availableMoves : Square[] = [];
         let currentPos = board.findPiece(this);
 
-        if(this.player == Player.WHITE) {
+        if(this.player == Player.WHITE && currentPos.row < 5) {
             let newSquare = Square.at(currentPos.row + 1, currentPos.col);
 
             if(board.getPiece(newSquare) === undefined) {
@@ -24,7 +24,9 @@ export default class Pawn extends Piece {
                     }
                 }
             }
-        } else {
+        }
+
+        if(this.player == Player.BLACK) {
             let newSquare = Square.at(currentPos.row - 1, currentPos.col);
 
             if(board.getPiece(newSquare) === undefined) {
