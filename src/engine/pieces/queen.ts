@@ -4,6 +4,7 @@ import Board from '../board';
 import Square from "../square";
 import GameSettings from "../gameSettings";
 import Bishop from "./bishop";
+import Rook from "./rook";
 
 export default class Queen extends Piece {
     public constructor(player: Player) {
@@ -14,6 +15,7 @@ export default class Queen extends Piece {
         let availableMoves : Square[] = [];
         let currentPos = board.findPiece(this);
 
-        return Bishop.getDiagonalMoves(currentPos);
+        availableMoves = [...Rook.getLateralMoves(currentPos), ...Bishop.getDiagonalMoves(currentPos)];
+        return availableMoves;
     }
 }
