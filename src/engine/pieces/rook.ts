@@ -10,7 +10,7 @@ export default class Rook extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        let currentPos = board.findPiece(this);
+        const currentPos = board.findPiece(this);
         return commonMoves.getLateralMoves(currentPos, board, this.player);
     }
 

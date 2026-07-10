@@ -12,8 +12,8 @@ export default class Bishop extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        let currentPos = board.findPiece(this);
-        return commonMoves.getDiagonalMoves(board.findPiece(this), board, this.player);
+        const currentPos = board.findPiece(this);
+        return commonMoves.getDiagonalMoves(currentPos, board, this.player);
     }
 
 

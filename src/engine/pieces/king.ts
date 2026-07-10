@@ -9,7 +9,7 @@ export default class King extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        let currentPos = board.findPiece(this);
+        const currentPos = board.findPiece(this);
         let availableMoves : Square[] = [];
 
         let di: number[] = [1, 1, 1, 0, 0, -1, -1, -1];
