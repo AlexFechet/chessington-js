@@ -13,7 +13,7 @@ export default class Knight extends Piece {
         const currentPos = board.findPiece(this);
         let availableMoves : Square[] = [];
 
-        let di: number[] = [2, 2, -2, -2, 1, 1, -1, -1];``
+        let di: number[] = [2, 2, -2, -2, 1, 1, -1, -1];
         let dj: number[] = [1, -1, 1, -1, 2, -2, 2, -2];
 
         for(let k = 0; k < di.length; k++) {
