@@ -1,6 +1,7 @@
 import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
+import Square from "../square";
 
 export default class King extends Piece {
     public constructor(player: Player) {
@@ -8,6 +9,21 @@ export default class King extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        return new Array(0);
+        let currentPos = board.findPiece(this);
+        let availableMoves : Square[] = [];
+
+        let di: number[] = [1, 1, 1, 0, 0, -1, -1, -1];
+        let dj: number[] = [1, 0, -1, 1, -1, 1, 0, -1];
+
+        for(let k = 0; k < di.length; k++) {
+            let newRow = currentPos.row + di[k];
+            let newCol = currentPos.col + dj[k];
+
+            if(Square.checkDimensions(newRow, newCol)) {
+                availableMoves.push(Square.at(newRow, newCol));
+            }
+        }
+
+        return availableMoves;
     }
 }
