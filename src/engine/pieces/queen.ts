@@ -1,6 +1,12 @@
 import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
+import Square from "../square";
+import GameSettings from "../gameSettings";
+import Bishop from "./bishop";
+import Rook from "./rook";
+import commonMoves from "../commonMoves";
+import player from "../player";
 
 export default class Queen extends Piece {
     public constructor(player: Player) {
@@ -8,6 +14,10 @@ export default class Queen extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        return new Array(0);
+        let availableMoves : Square[] = [];
+        const currentPos = board.findPiece(this);
+
+        availableMoves = [...commonMoves.getLateralMoves(currentPos, board, this.player), ...commonMoves.getDiagonalMoves(currentPos, board, this.player)];
+        return availableMoves;
     }
 }

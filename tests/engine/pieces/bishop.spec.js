@@ -1,15 +1,15 @@
 import 'chai/register-should';
 import Bishop from '../../../src/engine/pieces/bishop';
+import Pawn from '../../../src/engine/pieces/pawn';
+import King from '../../../src/engine/pieces/king';
 import Player from '../../../src/engine/player';
 import Square from '../../../src/engine/square';
 import Board from '../../../src/engine/board';
-import Pawn from "../../../src/engine/pieces/pawn";
-import King from "../../../src/engine/pieces/king";
 
 describe('Bishop', () => {
 
-    let board : Board;
-    beforeEach(() => board = new Board(Player.WHITE));
+    let board;
+    beforeEach(() => board = new Board());
 
     it('can move diagonally', () => {
         const bishop = new Bishop(Player.WHITE);
@@ -90,5 +90,4 @@ describe('Bishop', () => {
 
         moves.should.not.deep.include(Square.at(6, 6));
     });
-
 });
