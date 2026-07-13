@@ -26,18 +26,11 @@ export default class commonMoves {
     public static getLateralMoves(currentPos: Square, board: Board, player: Player) {
         let availableMoves: Square[] = [];
 
-        for (let i = 0; i < GameSettings.BOARD_SIZE; i++) {
-            if (i != currentPos.row) {
-                if (!this.goodSquare(board, player, availableMoves, i, currentPos.col)) {
-                    break;
-                }
-            }
-            if (i != currentPos.col) {
-                if (!this.goodSquare(board, player, availableMoves, currentPos.row, i)) {
-                    break;
-                }
-            }
-        }
+        this.diagonalPosition(currentPos, board, availableMoves, player ,1, 0);
+        this.diagonalPosition(currentPos, board, availableMoves, player ,-1, 0);
+        this.diagonalPosition(currentPos, board, availableMoves, player ,0, 1);
+        this.diagonalPosition(currentPos, board, availableMoves, player ,0, -1);
+
         return availableMoves;
     }
 
