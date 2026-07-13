@@ -10,17 +10,17 @@ import King from "./pieces/king";
 export default class commonMoves {
 
     // it adds the move to the available moves
-    // side effect introduced to the rock and bishop, it return true if it need to stop the flow in the for loop if
+    // side effect introduced to the rock and bishop, it return false if it need to stop the flow in the for loop if
     // it captures another piece
     public static goodSquare(board: Board, player: Player, availableMoves : Square[] , newRow : number, newCol: number) : boolean {
         if (board.getPiece(Square.at(newRow, newCol)) !== undefined) {
             if (board.getPiece(Square.at(newRow, newCol))?.player !== player && !(board.getPiece(Square.at(newRow,newCol)) instanceof King)) {
                 availableMoves.push(Square.at(newRow, newCol));
             }
-            return true;
+            return false;
         }
         availableMoves.push(Square.at(newRow, newCol));
-        return false;
+        return true;
     }
 
     public static getLateralMoves(currentPos: Square, board: Board, player: Player) {
@@ -28,12 +28,12 @@ export default class commonMoves {
 
         for (let i = 0; i < GameSettings.BOARD_SIZE; i++) {
             if (i != currentPos.row) {
-                if (this.goodSquare(board, player, availableMoves, i, currentPos.col)) {
+                if (!this.goodSquare(board, player, availableMoves, i, currentPos.col)) {
                     break;
                 }
             }
             if (i != currentPos.col) {
-                if (this.goodSquare(board, player, availableMoves, currentPos.row, i)) {
+                if (!this.goodSquare(board, player, availableMoves, currentPos.row, i)) {
                     break;
                 }
             }
@@ -46,7 +46,7 @@ export default class commonMoves {
             let newRow = currentPos.row + i * movingFoward;
             let newCol = currentPos.col + i * movingBackwards;
             if (Square.checkDimensions(newRow, newCol)) {
-                if (this.goodSquare(board, player, availableMoves, newRow, newCol)) {
+                if (!this.goodSquare(board, player, availableMoves, newRow, newCol)) {
                     break;
                 }
             }
